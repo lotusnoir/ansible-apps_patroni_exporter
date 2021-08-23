@@ -1,0 +1,15 @@
+---
+# Binary install
+patroni_exporter_version: "0.1.0"
+patroni_exporter_url: "https://github.com/lotusnoir/prometheus-patroni_exporter/releases/download/{{ patroni_exporter_version }}/patroni_exporter.py"
+patroni_exporter_install_dir: "/usr/local/bin"
+patroni_exporter_force_install: false
+
+# Exporter options
+patroni_exporter_bind_address: "0.0.0.0"
+patroni_exporter_port: "9130"
+patroni_exporter_address_family: "AF_INET"
+patroni_url: "http://localhost:8008/patroni"
+patroni_exporter_timeout: "5"
+patroni_exporter_requests_verify: "true"
+patroni_exporter_debug: ""

@@ -1,0 +1,5 @@
+---
+- name: "restart patroni_exporter"
+  service:
+    name: "patroni_exporter"
+    state: "restarted"

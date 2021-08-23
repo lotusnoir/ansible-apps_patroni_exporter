@@ -1,0 +1,25 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus patroni Exporter
+After=network-online.target
+StartLimitInterval=0
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 {{ patroni_exporter_install_dir }}/patroni_exporter.py  \
+          --bind {{ patroni_exporter_bind_address }} \
+          --port {{ patroni_exporter_port }} \
+          --address-family {{ patroni_exporter_address_family }} \
+          --patroni-url {{ patroni_url }} \
+          --timeout {{ patroni_exporter_timeout }} \
+          --requests-verify {{ patroni_exporter_requests_verify }}
+
+ExecReload=/bin/kill -HUP $MAINPID
+SyslogIdentifier=patroni_exporter
+RestartSec=1
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,39 @@
+---
+- name: "Check for patroni_exporter binary"
+  stat:
+    path: '{{ patroni_exporter_install_dir }}/patroni_exporter.py'
+  changed_when: false
+  register: patroni_exporter_install
+
+- when: not patroni_exporter_install.stat.exists or patroni_exporter_force_install|bool
+  block:
+    - name: "Install requierements"
+      package:
+        name: "ca-certificates"
+        state: present
+
+    - name: "Download patroni_exporter..."
+      get_url:
+        url: '{{ patroni_exporter_url }}'
+        dest: '{{ patroni_exporter_install_dir }}'
+        timeout: '60'
+        mode: '0755'
+
+    - name: "Install requierements"
+      package:
+        name: '{{ patroni_packages }}'
+        state: present
+
+- name: "Create systemd for patroni_exporter"
+  template:
+    src: 'patroni_exporter.service.j2'
+    dest: '/etc/systemd/system/patroni_exporter.service'
+    mode: '0640'
+  notify: "restart patroni_exporter"
+
+- name: "Enable and Start patroni_exporter.service"
+  service:
+    name: patroni_exporter
+    state: started
+    enabled: true
+    daemon_reload: true
