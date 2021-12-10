@@ -1,0 +1,5 @@
+---
+patroni_packages:
+  - python3-requests
+  - python3-prometheus_client
+  - python3-dateutil
