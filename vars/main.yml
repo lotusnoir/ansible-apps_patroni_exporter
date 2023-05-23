@@ -1,5 +1,6 @@
 ---
 patroni_packages:
+  - ca-certificates
   - python3-requests
   - python3-prometheus-client
   - python3-dateutil
