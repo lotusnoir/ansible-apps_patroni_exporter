@@ -1,5 +1,5 @@
 ---
-- name: "restart patroni_exporter"
+- name: "Restart patroni_exporter"
   ansible.builtin.service:
     name: "patroni_exporter"
     state: "restarted"
