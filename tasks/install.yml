@@ -8,12 +8,6 @@
 - name: "Install tasks"
   when: not patroni_exporter_install.stat.exists or patroni_exporter_force_install|bool
   block:
-    - name: "REDHAT | Ensure EPEL is enabled"
-      ansible.builtin.yum:
-        name: epel-release
-        state: present
-      when: ansible_os_family == 'RedHat'
-
     - name: "Install requierements"
       ansible.builtin.package:
         name: '{{ patroni_packages }}'
