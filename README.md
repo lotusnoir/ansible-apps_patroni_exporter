@@ -24,7 +24,7 @@ Deploy [patroni_exporter](https://github.com/momorientes/patroni_exporter) to ex
 
 ## Requirements
 
-['lotusnoir.system_repo_epel']
+- lotusnoir.system_repo_epel
 
 ## Role variables
 
